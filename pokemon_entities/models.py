@@ -15,6 +15,11 @@ class PokemonEntity(models.Model):
     pockemon = models.ForeignKey(Pockemon, on_delete=models.CASCADE)
     appeared_at = models.DateTimeField(null=True)
     disappeared_at = models.DateTimeField(null=True)
+    level = models.IntegerField()
+    health = models.IntegerField()
+    strength = models.IntegerField()
+    defence = models.IntegerField()
+    stamina = models.IntegerField()
 
     def __str__(self):
         return 'lat: {}, lon: {}'.format(self.lat, self.lon)
