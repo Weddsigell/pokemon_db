@@ -1,7 +1,7 @@
 from django.db import models
 
 
-class Pockemon(models.Model):
+class Pokemon(models.Model):
     name = models.CharField(max_length=100)
     image = models.ImageField(null=True, upload_to=name)
 
@@ -12,7 +12,7 @@ class Pockemon(models.Model):
 class PokemonEntity(models.Model):
     lat = models.FloatField()
     lon = models.FloatField()
-    pockemon = models.ForeignKey(Pockemon, on_delete=models.CASCADE)
+    pokemon = models.ForeignKey(Pokemon, on_delete=models.CASCADE)
     appeared_at = models.DateTimeField(null=True)
     disappeared_at = models.DateTimeField(null=True)
     level = models.IntegerField()
