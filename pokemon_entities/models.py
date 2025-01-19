@@ -2,32 +2,35 @@ from django.db import models
 
 
 class Pokemon(models.Model):
-    title_ru = models.CharField(max_length=100)
-    title_en = models.CharField(max_length=100)
-    title_jp = models.CharField(max_length=100)
-    description = models.TextField()
-    previous_evolutions = models.ForeignKey('self',
-                                       null=True,
-                                       blank=True,
-                                       related_name='next_evolution',
-                                       on_delete=models.SET_NULL)
-    image = models.ImageField(null=True, upload_to=title_en, blank=True,)
+    title_ru = models.CharField(max_length=100, verbose_name='имя на русском')
+    title_en = models.CharField(max_length=100, verbose_name='имя на английском')
+    title_jp = models.CharField(max_length=100, verbose_name='имя на японском')
+    description = models.TextField(verbose_name='описание покемона')
+    previous_evolutions = models.ForeignKey(
+        'self',
+        verbose_name='следующая эволюция',
+        null=True,
+        blank=True,
+        related_name='next_evolution',
+        on_delete=models.SET_NULL
+    )
+    image = models.ImageField('картинка покемона', null=True, upload_to=title_en, blank=True,)
 
     def __str__(self):
         return '{}'.format(self.title_en)
 
 
 class PokemonEntity(models.Model):
-    lat = models.FloatField()
-    lon = models.FloatField()
-    pokemon = models.ForeignKey(Pokemon, on_delete=models.CASCADE)
-    appeared_at = models.DateTimeField(null=True)
-    disappeared_at = models.DateTimeField(null=True)
-    level = models.IntegerField(null=True)
-    health = models.IntegerField(null=True)
-    strength = models.IntegerField(null=True)
-    defence = models.IntegerField(null=True)
-    stamina = models.IntegerField(null=True)
+    lat = models.FloatField('Широта')
+    lon = models.FloatField('Долгота')
+    pokemon = models.ForeignKey(Pokemon, on_delete=models.CASCADE, verbose_name='Тип покемона')
+    appeared_at = models.DateTimeField(null=True, verbose_name='когда появляется')
+    disappeared_at = models.DateTimeField(null=True, verbose_name='когда пропадает')
+    level = models.IntegerField(null=True, blank=True, verbose_name='уровень')
+    health = models.IntegerField(null=True, blank=True, verbose_name='здоровье')
+    strength = models.IntegerField(null=True, blank=True, verbose_name='сила')
+    defence = models.IntegerField(null=True, blank=True, verbose_name='защита')
+    stamina = models.IntegerField(null=True, blank=True, verbose_name='выносливость')
 
     def __str__(self):
         return 'lat: {}, lon: {}'.format(self.lat, self.lon)
