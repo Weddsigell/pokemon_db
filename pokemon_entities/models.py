@@ -3,9 +3,9 @@ from django.db import models
 
 class Pokemon(models.Model):
     title_ru = models.CharField(max_length=100, verbose_name='имя на русском')
-    title_en = models.CharField(max_length=100, verbose_name='имя на английском')
-    title_jp = models.CharField(max_length=100, verbose_name='имя на японском')
-    description = models.TextField(verbose_name='описание покемона')
+    title_en = models.CharField(max_length=100, verbose_name='имя на английском', null=True, blank=True, )
+    title_jp = models.CharField(max_length=100, verbose_name='имя на японском', null=True, blank=True, )
+    description = models.TextField(verbose_name='описание покемона', null=True, blank=True, )
     previous_evolutions = models.ForeignKey(
         'self',
         verbose_name='следующая эволюция',
