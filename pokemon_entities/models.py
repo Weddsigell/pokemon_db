@@ -14,15 +14,15 @@ class Pokemon(models.Model):
         related_name='next_evolution',
         on_delete=models.SET_NULL
     )
-    image = models.ImageField('картинка покемона', null=True, upload_to=title_en, blank=True,)
+    image = models.ImageField(verbose_name='картинка покемона', null=True, upload_to=title_en, blank=True,)
 
     def __str__(self):
         return '{}'.format(self.title_en)
 
 
 class PokemonEntity(models.Model):
-    lat = models.FloatField('Широта')
-    lon = models.FloatField('Долгота')
+    lat = models.FloatField(verbose_name='Широта')
+    lon = models.FloatField(verbose_name='Долгота')
     pokemon = models.ForeignKey(Pokemon, on_delete=models.CASCADE, verbose_name='Тип покемона')
     appeared_at = models.DateTimeField(null=True, verbose_name='когда появляется')
     disappeared_at = models.DateTimeField(null=True, verbose_name='когда пропадает')
