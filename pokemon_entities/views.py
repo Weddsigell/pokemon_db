@@ -1,7 +1,7 @@
 import folium
 import json
 from django.http import HttpResponseNotFound
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from pogomap.settings import MEDIA_URL, TIME_ZONE
 from pokemon_entities.models import Pokemon, PokemonEntity
 from django.utils import timezone
@@ -74,7 +74,7 @@ def show_pokemon(request, pokemon_id):
             request.build_absolute_uri(pokemon.pokemon.image.url)
         )
 
-    pokemon = Pokemon.objects.get(id=pokemon_id)
+    pokemon = get_object_or_404(Pokemon, id=pokemon_id)
     pokemon_info = {
         "title_ru": pokemon.title_ru,
         "title_en": pokemon.title_en,
