@@ -14,7 +14,7 @@ class Pokemon(models.Model):
         related_name='next_evolution',
         on_delete=models.SET_NULL
     )
-    image = models.ImageField(verbose_name='картинка покемона', upload_to='media/', null=True, blank=True,)
+    image = models.ImageField(verbose_name='картинка покемона', null=True, blank=True,)
 
     def __str__(self):
         return '{}'.format(self.title_en)
